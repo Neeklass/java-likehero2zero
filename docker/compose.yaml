@@ -1,39 +1,21 @@
-# example from official docker documentation
 services:
-  frontend:
-    image: example/webapp
-    ports:
-      - "443:8043"
-    networks:
-      - front-tier
-      - back-tier
-    configs:
-      - httpd-config
-    secrets:
-      - server-certificate
+  db:
+    image: mysql:latest
+    restart: always
 
-  backend:
-    image: example/database
-    volumes:
-      - db-data:/etc/data
-    networks:
-      - back-tier
+    environment:
+      MYSQL_DATABASE: 'herotozero'
+      MYSQL_USER: 'niklas'            # So you don't have to use root, but you can if you like
+      MYSQL_PASSWORD: 'test123'       # You can use whatever password you like
+      MYSQL_ROOT_PASSWORD: 'test123'  # Password for root access
+
+    ports:
+      - '3306:3306'     # <Port exposed> : <MySQL Port running inside container>
+    expose:
+      - '3306'          # Opens port 3306 on the container
+ 
+    volumes: 
+      - herotozero-data:/var/lib/mysql  # Where the data will be persisted (doesn't delete on startup of the container)
 
 volumes:
-  db-data:
-    driver: flocker
-    driver_opts:
-      size: "10GiB"
-
-configs:
-  httpd-config:
-    external: true
-
-secrets:
-  server-certificate:
-    external: true
-
-networks:
-  # The presence of these objects is sufficient to define them
-  front-tier: {}
-  back-tier: {}
+  herotozero-data:  # Names the volume
