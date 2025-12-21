@@ -51,3 +51,8 @@ mkdir -p src/main/resources/META-INF (Hier kommt die Datenbank-Konfiguration hin
 
 mkdir -p src/main/webapp/WEB-INF (Hier kommen die JSF-Konfigurationsdateien hin)
 
+# dev
+
+- docker desktop starten
+- compose.yaml starten für mysql
+- devcontainer.json in vscode starten für java
