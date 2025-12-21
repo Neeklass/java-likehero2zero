@@ -33,3 +33,21 @@ tatsächlichen Umsetzung gezeigt werden, wie …
 - JPA mit einem Persistenz-Provider (z. B. Hibernate)
 - eine relationale Datenbank (z. B. MySQL)
 
+
+# Setup
+
+wenn mit devconatiner verbunden. bash öffnen das eingeben:
+
+mvn archetype:generate -DgroupId=de.niklas -DartifactId=herotozero -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+
+
+pom.xml erstellen
+
+create folders
+
+mkdir -p src/main/java/de/niklas (Hier kommt dein Java-Code hin)
+
+mkdir -p src/main/resources/META-INF (Hier kommt die Datenbank-Konfiguration hin)
+
+mkdir -p src/main/webapp/WEB-INF (Hier kommen die JSF-Konfigurationsdateien hin)
+
