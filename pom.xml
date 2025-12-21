@@ -27,6 +27,7 @@
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.4.1.Final</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -54,15 +55,22 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>fish.payara.maven.plugins</groupId>
-                <artifactId>payara-micro-maven-plugin</artifactId>
-                <version>2.1.0</version>
-                <configuration>
-                    <payaraVersion>6.2023.10</payaraVersion>
-                    <deployWar>true</deployWar>
-                </configuration>
-            </plugin>
+<plugin>
+    <groupId>io.openliberty.tools</groupId>
+    <artifactId>liberty-maven-plugin</artifactId>
+    <version>3.11.4</version>
+    <configuration>
+        <runtimeArtifact>
+            <groupId>io.openliberty</groupId>
+            <artifactId>openliberty-runtime</artifactId>
+            <version>25.0.0.12</version>
+            <type>zip</type>
+        </runtimeArtifact>
+        <devOptions>
+            <refreshInterval>2</refreshInterval>
+        </devOptions>
+    </configuration>
+</plugin>
         </plugins>
     </build>
 </project>

@@ -58,3 +58,5 @@ mkdir -p src/main/webapp/WEB-INF (Hier kommen die JSF-Konfigurationsdateien hin)
 - devcontainer.json in vscode starten für java
 
 mvn compile exec:java -Dexec.mainClass="de.niklas.MainTest"
+
+mvn liberty:dev
