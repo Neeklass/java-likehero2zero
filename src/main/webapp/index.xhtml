@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Like Hero To Zero</title>
+</h:head>
+
+<h:body>
+    <h:form id="mainForm">
+        <h1>Like Hero To Zero</h1>
+        
+        <p>Willkommen beim Nachhaltigkeitsprojekt. Hier finden Sie offizielle CO2-Emissionsdaten weltweit.</p>
+
+        <p:outputLabel for="countrySelect" value="Land auswählen: " />
+        <p:selectOneMenu id="countrySelect" value="#{publicDataBean.selectedCountryId}">
+            <f:selectItem itemLabel="Bitte wählen..." itemValue="" />
+            <f:selectItems value="#{publicDataBean.allCountries}" var="c" 
+                           itemLabel="#{c.name}" itemValue="#{c.countryId}" />
+            <p:ajax listener="#{publicDataBean.updateSelectedData}" update="dataDisplay" />
+        </p:selectOneMenu>
+
+        <hr />
+
+        <h:panelGroup id="dataDisplay">
+            <h:panelGrid columns="2" rendered="#{not empty publicDataBean.latestData}">
+                <h:outputText value="Jahr:" />
+                <h:outputText value="#{publicDataBean.latestData.year}" />
+
+                <h:outputText value="CO2 Ausstoß (kt):" />
+                <h:outputText value="#{publicDataBean.latestData.co2Value}">
+                    <f:convertNumber pattern="#,##0.000" />
+                </h:outputText>
+            </h:panelGrid>
+            
+            <h:outputText value="Keine freigegebenen Daten für dieses Land verfügbar." 
+                          rendered="#{empty publicDataBean.latestData and not empty publicDataBean.selectedCountryId}" />
+        </h:panelGroup>
+    </h:form>
+</h:body>
+</html>
