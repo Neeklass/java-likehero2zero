@@ -1,6 +1,10 @@
 {
     "name": "Java 21 Environment",
-    "image": "mcr.microsoft.com/devcontainers/java:21",
+    "dockerComposeFile": [
+        "../docker/compose.yaml"
+    ],
+    "service": "app",
+    "workspaceFolder": "/workspaces/app", // needs to be the same as compose.yaml
     "features": {
         "ghcr.io/devcontainers/features/java:1": {
             "version": "21",
@@ -14,5 +18,6 @@
                 "redhat.vscode-community-server-connector"
             ]
         }
-    }
+    },
+    "remoteUser": "vscode"
 }

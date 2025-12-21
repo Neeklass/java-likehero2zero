@@ -17,5 +17,12 @@ services:
     volumes: 
       - herotozero-data:/var/lib/mysql  # Where the data will be persisted (doesn't delete on startup of the container)
 
+  app:
+    image: mcr.microsoft.com/devcontainers/java:21
+    volumes:
+      - ..:/workspaces/app:cached
+    command: sleep infinity
+    network_mode: service:db # Network share with devcontainer
+
 volumes:
   herotozero-data:  # Names the volume
