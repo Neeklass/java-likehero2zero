@@ -1,0 +1,17 @@
+# Compiled
+target/
+
+# IDE
+.vscode/
+*.code-workspace
+
+# Java / Maven
+*.class
+*.log
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Windows
+Thumbs.db
