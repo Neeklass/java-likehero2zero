@@ -56,3 +56,5 @@ mkdir -p src/main/webapp/WEB-INF (Hier kommen die JSF-Konfigurationsdateien hin)
 - docker desktop starten
 - compose.yaml starten für mysql
 - devcontainer.json in vscode starten für java
+
+mvn compile exec:java -Dexec.mainClass="de.niklas.MainTest"
