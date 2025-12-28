@@ -2,12 +2,30 @@
 <server description="HeroToZero Server">
     <featureManager>
         <feature>jakartaee-10.0</feature>
+        <feature>persistence-3.1</feature>
         <feature>faces-4.0</feature>
         <feature>managedBeans-2.0</feature>
         <feature>cdi-4.0</feature>
     </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080" httpsPort="9443" />
+
+    <!-- MySQL Data Source -->
+    <library id="mysqlLib">
+        <fileset dir="${shared.resource.dir}/mysql" includes="*.jar"/>
+    </library>
+
+    <dataSource id="herotozeroDS" jndiName="jdbc/herotozero">
+        <jdbcDriver libraryRef="mysqlLib"/>
+        <properties 
+            serverName="localhost" 
+            portNumber="3306" 
+            databaseName="herotozero" 
+            user="niklas" 
+            password="test123"
+            allowPublicKeyRetrieval="true"
+            useSSL="false"/>
+    </dataSource>
 
     <webApplication location="herotozero.war" contextRoot="/herotozero" />
 </server>

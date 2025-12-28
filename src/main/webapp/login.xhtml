@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Login - Hero To Zero</title>
+</h:head>
+
+<h:body>
+    <h:form id="loginForm">
+        <p:messages id="messages" showDetail="true" closable="true" />
+        
+        <p:card style="width: 400px; margin: 50px auto;">
+            <f:facet name="title">
+                Login
+            </f:facet>
+            <f:facet name="subtitle">
+                Melden Sie sich an, um CO2-Daten zu verwalten
+            </f:facet>
+            
+            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+                
+                <p:outputLabel for="username" value="Benutzername:" />
+                <p:inputText id="username" 
+                             value="#{loginBean.username}" 
+                             required="true" 
+                             requiredMessage="Benutzername ist erforderlich"
+                             style="width: 100%;" />
+                
+                <p:outputLabel for="password" value="Passwort:" />
+                <p:password id="password" 
+                            value="#{loginBean.password}" 
+                            required="true" 
+                            requiredMessage="Passwort ist erforderlich"
+                            feedback="false"
+                            style="width: 100%;" />
+                
+            </h:panelGrid>
+            
+            <f:facet name="footer">
+                <p:commandButton value="Anmelden" 
+                                 action="#{loginBean.login}" 
+                                 update="@form"
+                                 icon="pi pi-sign-in"
+                                 styleClass="ui-button-success" />
+                
+                <p:button value="Registrieren" 
+                          outcome="register" 
+                          icon="pi pi-user-plus"
+                          styleClass="ui-button-secondary" 
+                          style="margin-left: 10px;" />
+                          
+                <p:button value="Zurück" 
+                          outcome="index" 
+                          icon="pi pi-arrow-left"
+                          styleClass="ui-button-secondary" 
+                          style="margin-left: 10px;" />
+            </f:facet>
+        </p:card>
+    </h:form>
+</h:body>
+</html>

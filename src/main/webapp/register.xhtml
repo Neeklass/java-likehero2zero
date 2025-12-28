@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Benutzerregistrierung - Hero To Zero</title>
+</h:head>
+
+<h:body>
+    <h:form id="registerForm">
+        <p:messages id="messages" showDetail="true" closable="true" />
+        
+        <p:card style="width: 600px; margin: 50px auto;">
+            <f:facet name="title">
+                Benutzerregistrierung
+            </f:facet>
+            <f:facet name="subtitle">
+                Registrieren Sie sich als Wissenschaftler:in oder Editor:in
+            </f:facet>
+            
+            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+                
+                <p:outputLabel for="username" value="Benutzername:" />
+                <p:inputText id="username" 
+                             value="#{registerBean.user.username}" 
+                             required="true" 
+                             requiredMessage="Benutzername ist erforderlich"
+                             style="width: 100%;" />
+                
+                <p:outputLabel for="password" value="Passwort:" />
+                <p:password id="password" 
+                            value="#{registerBean.user.passwordHash}" 
+                            required="true" 
+                            requiredMessage="Passwort ist erforderlich"
+                            feedback="true"
+                            weakLabel="Schwach"
+                            goodLabel="Gut"
+                            strongLabel="Stark"
+                            style="width: 100%;" />
+                
+                <p:outputLabel for="firstname" value="Vorname:" />
+                <p:inputText id="firstname" 
+                             value="#{registerBean.user.firstname}" 
+                             style="width: 100%;" />
+                
+                <p:outputLabel for="lastname" value="Nachname:" />
+                <p:inputText id="lastname" 
+                             value="#{registerBean.user.lastname}" 
+                             style="width: 100%;" />
+                
+                <p:outputLabel for="role" value="Rolle:" />
+                <p:selectOneMenu id="role" 
+                                 value="#{registerBean.user.role}" 
+                                 required="true"
+                                 requiredMessage="Bitte wählen Sie eine Rolle"
+                                 style="width: 100%;">
+                    <f:selectItem itemLabel="-- Bitte wählen --" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Wissenschaftler:in" itemValue="SCIENTIST" />
+                    <f:selectItem itemLabel="Editor:in" itemValue="EDITOR" />
+                </p:selectOneMenu>
+                
+                <p:outputLabel for="country" value="Land:" />
+                <p:selectOneMenu id="country" 
+                                 value="#{registerBean.user.country}" 
+                                 converter="omnifaces.SelectItemsConverter"
+                                 style="width: 100%;">
+                    <f:selectItem itemLabel="-- Bitte wählen --" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{registerBean.allCountries}" 
+                                   var="country" 
+                                   itemLabel="#{country.name}" 
+                                   itemValue="#{country}" />
+                </p:selectOneMenu>
+                
+            </h:panelGrid>
+            
+            <f:facet name="footer">
+                <p:commandButton value="Registrieren" 
+                                 action="#{registerBean.register}" 
+                                 update="@form"
+                                 icon="pi pi-user-plus"
+                                 styleClass="ui-button-success" />
+                
+                <p:button value="Zurück" 
+                          outcome="index" 
+                          icon="pi pi-arrow-left"
+                          styleClass="ui-button-secondary" 
+                          style="margin-left: 10px;" />
+            </f:facet>
+        </p:card>
+    </h:form>
+</h:body>
+</html>
