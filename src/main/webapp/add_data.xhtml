@@ -22,9 +22,18 @@
             
             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
                 
-                <p:outputLabel value="Land:" />
-                <h:outputText value="#{loginSessionBean.user.country.name}" 
-                              style="font-weight: bold;" />
+                <p:outputLabel for="country" value="Land:" />
+                <p:selectOneMenu id="country" 
+                                 value="#{addDataBean.selectedCountryId}" 
+                                 required="true"
+                                 requiredMessage="Bitte wählen Sie ein Land aus"
+                                 style="width: 100%;">
+                    <f:selectItem itemLabel="Bitte wählen..." itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{addDataBean.allCountries}" 
+                                   var="c" 
+                                   itemLabel="#{c.name}" 
+                                   itemValue="#{c.countryId}" />
+                </p:selectOneMenu>
                 
                 <p:outputLabel for="year" value="Jahr:" />
                 <p:inputNumber id="year" 

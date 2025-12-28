@@ -63,14 +63,15 @@
                 
                 <p:outputLabel for="country" value="Land:" />
                 <p:selectOneMenu id="country" 
-                                 value="#{registerBean.user.country}" 
-                                 converter="omnifaces.SelectItemsConverter"
+                                 value="#{registerBean.selectedCountryId}" 
+                                 required="true"
+                                 requiredMessage="Bitte wählen Sie ein Land aus"
                                  style="width: 100%;">
                     <f:selectItem itemLabel="-- Bitte wählen --" itemValue="#{null}" noSelectionOption="true" />
                     <f:selectItems value="#{registerBean.allCountries}" 
                                    var="country" 
                                    itemLabel="#{country.name}" 
-                                   itemValue="#{country}" />
+                                   itemValue="#{country.countryId}" />
                 </p:selectOneMenu>
                 
             </h:panelGrid>

@@ -18,12 +18,22 @@ public class RegisterBean {
     private UserService userService;
 
     private User user = new User();
+    private Integer selectedCountryId;
 
     /**
      * Registriert einen neuen User und zeigt eine Erfolgsmeldung an.
      */
     public void register() {
         try {
+            // Setze das Land basierend auf der ausgewählten ID
+            if (selectedCountryId != null) {
+                Country country = userService.getAllCountries().stream()
+                    .filter(c -> c.getCountryId().equals(selectedCountryId))
+                    .findFirst()
+                    .orElse(null);
+                user.setCountry(country);
+            }
+            
             userService.registerUser(user);
             
             FacesContext context = FacesContext.getCurrentInstance();
@@ -60,5 +70,13 @@ public class RegisterBean {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    
+    public Integer getSelectedCountryId() {
+        return selectedCountryId;
+    }
+    
+    public void setSelectedCountryId(Integer selectedCountryId) {
+        this.selectedCountryId = selectedCountryId;
     }
 }
