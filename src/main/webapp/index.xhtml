@@ -10,8 +10,8 @@
 </h:head>
 
 <h:body>
-    <h:form id="mainForm">
-        <p:menubar>
+    <h:form id="mainForm" styleClass="ui-fluid">
+        <p:menubar styleClass="ui-menubar-modern">
             <p:menuitem value="Home" icon="pi pi-home" outcome="index" />
             
             <!-- If NOT logged in: Login & Register -->
@@ -40,34 +40,50 @@
             </f:facet>
         </p:menubar>
         
-        <h1>Like Hero To Zero</h1>
-        
-        <p>View the latest CO2 emission data by country</p>
+        <p:outputPanel style="max-width: 800px; margin: 30px auto; padding: 20px;">
+            <p:card>
+                <f:facet name="title">
+                    Like Hero To Zero
+                </f:facet>
+                <f:facet name="subtitle">
+                    View the latest CO2 emission data by country
+                </f:facet>
+                
+                <h:panelGrid columns="2" cellpadding="10" styleClass="ui-fluid" style="width: 100%; margin-bottom: 20px;">
+                    <p:outputLabel for="countrySelect" value="Select country:" />
+                    <p:selectOneMenu id="countrySelect" value="#{publicDataBean.selectedCountryId}">
+                        <f:selectItem itemLabel="Please select..." itemValue="" />
+                        <f:selectItems value="#{publicDataBean.allCountries}" var="c" 
+                                       itemLabel="#{c.name}" itemValue="#{c.countryId}" />
+                        <p:ajax listener="#{publicDataBean.updateSelectedData}" update="dataDisplay" />
+                    </p:selectOneMenu>
+                </h:panelGrid>
 
-        <p:outputLabel for="countrySelect" value="Select country: " />
-        <p:selectOneMenu id="countrySelect" value="#{publicDataBean.selectedCountryId}">
-            <f:selectItem itemLabel="Please select..." itemValue="" />
-            <f:selectItems value="#{publicDataBean.allCountries}" var="c" 
-                           itemLabel="#{c.name}" itemValue="#{c.countryId}" />
-            <p:ajax listener="#{publicDataBean.updateSelectedData}" update="dataDisplay" />
-        </p:selectOneMenu>
+                <p:divider />
 
-        <hr />
+                <h:panelGroup id="dataDisplay">
+                    <p:panel header="Emission Data" rendered="#{not empty publicDataBean.latestData}" 
+                             styleClass="ui-panel-modern" style="margin-top: 20px;">
+                        <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+                            <h:outputText value="Year:" style="font-weight: bold;" />
+                            <h:outputText value="#{publicDataBean.latestData.year}" />
 
-        <h:panelGroup id="dataDisplay">
-            <h:panelGrid columns="2" rendered="#{not empty publicDataBean.latestData}">
-                <h:outputText value="Year:" />
-                <h:outputText value="#{publicDataBean.latestData.year}" />
-
-                <h:outputText value="CO2 Emissions (kt):" />
-                <h:outputText value="#{publicDataBean.latestData.co2Value}">
-                    <f:convertNumber pattern="#,##0.000" />
-                </h:outputText>
-            </h:panelGrid>
-            
-            <h:outputText value="No approved data available for this country." 
-                          rendered="#{empty publicDataBean.latestData and not empty publicDataBean.selectedCountryId}" />
-        </h:panelGroup>
+                            <h:outputText value="CO2 Emissions (kt):" style="font-weight: bold;" />
+                            <h:outputText value="#{publicDataBean.latestData.co2Value}">
+                                <f:convertNumber pattern="#,##0.000" />
+                            </h:outputText>
+                        </h:panelGrid>
+                    </p:panel>
+                    
+                    <p:panel header="No Data Available" rendered="#{empty publicDataBean.latestData and not empty publicDataBean.selectedCountryId}" 
+                             styleClass="ui-panel-modern" style="margin-top: 20px;">
+                        <p:messages severity="info" closable="false">
+                            <p:message severity="info" summary="No approved data available for this country." />
+                        </p:messages>
+                    </p:panel>
+                </h:panelGroup>
+            </p:card>
+        </p:outputPanel>
     </h:form>
 </h:body>
 </html>

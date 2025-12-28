@@ -9,68 +9,67 @@
 </h:head>
 
 <h:body>
-    <h:form id="addDataForm">
+    <h:form id="addDataForm" styleClass="ui-fluid">
         <p:messages id="messages" showDetail="true" closable="true" />
         
-        <p:card style="width: 600px; margin: 50px auto;">
-            <f:facet name="title">
-                Add Climate Data
-            </f:facet>
-            <f:facet name="subtitle">
-                Enter new CO2 emission data
-            </f:facet>
-            
-            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+        <p:outputPanel style="max-width: 600px; margin: 50px auto; padding: 20px;">
+            <p:card>
+                <f:facet name="title">
+                    Add Climate Data
+                </f:facet>
+                <f:facet name="subtitle">
+                    Enter new CO2 emission data
+                </f:facet>
                 
-                <p:outputLabel for="country" value="Country:" />
-                <p:selectOneMenu id="country" 
-                                 value="#{addDataBean.selectedCountryId}" 
-                                 required="true"
-                                 requiredMessage="Please select a country"
-                                 style="width: 100%;">
-                    <f:selectItem itemLabel="Please select..." itemValue="#{null}" noSelectionOption="true" />
-                    <f:selectItems value="#{addDataBean.allCountries}" 
-                                   var="c" 
-                                   itemLabel="#{c.name}" 
-                                   itemValue="#{c.countryId}" />
-                </p:selectOneMenu>
+                <h:panelGrid columns="2" cellpadding="10" styleClass="ui-fluid" style="width: 100%;">
+                    
+                    <p:outputLabel for="country" value="Country:" />
+                    <p:selectOneMenu id="country" 
+                                     value="#{addDataBean.selectedCountryId}" 
+                                     required="true"
+                                     requiredMessage="Please select a country">
+                        <f:selectItem itemLabel="Please select..." itemValue="#{null}" noSelectionOption="true" />
+                        <f:selectItems value="#{addDataBean.allCountries}" 
+                                       var="c" 
+                                       itemLabel="#{c.name}" 
+                                       itemValue="#{c.countryId}" />
+                    </p:selectOneMenu>
+                    
+                    <p:outputLabel for="year" value="Year:" />
+                    <p:inputNumber id="year" 
+                                   value="#{addDataBean.newData.year}" 
+                                   decimalPlaces="0"
+                                   thousandSeparator=""
+                                   required="true"
+                                   requiredMessage="Year is required"
+                                   minValue="1900"
+                                   maxValue="2100" />
+                    
+                    <p:outputLabel for="co2Value" value="CO2 Emissions (kt):" />
+                    <p:inputNumber id="co2Value" 
+                                   value="#{addDataBean.newData.co2Value}" 
+                                   required="true"
+                                   requiredMessage="CO2 value is required"
+                                   decimalPlaces="3"
+                                   minValue="0" />
+                    
+                </h:panelGrid>
                 
-                <p:outputLabel for="year" value="Year:" />
-                <p:inputNumber id="year" 
-                               value="#{addDataBean.newData.year}" 
-                               decimalPlaces="0"
-                               thousandSeparator=""
-                               required="true"
-                               requiredMessage="Year is required"
-                               minValue="1900"
-                               maxValue="2100"
-                               style="width: 100%;" />
-                
-                <p:outputLabel for="co2Value" value="CO2 Emissions (kt):" />
-                <p:inputNumber id="co2Value" 
-                               value="#{addDataBean.newData.co2Value}" 
-                               required="true"
-                               requiredMessage="CO2 value is required"
-                               decimalPlaces="3"
-                               minValue="0"
-                               style="width: 100%;" />
-                
-            </h:panelGrid>
-            
-            <f:facet name="footer">
-                <p:commandButton value="Submit" 
-                                 action="#{addDataBean.save}" 
-                                 update="@form"
-                                 icon="pi pi-save"
-                                 styleClass="ui-button-success" />
-                
-                <p:button value="Back" 
-                          outcome="index" 
-                          icon="pi pi-arrow-left"
-                          styleClass="ui-button-secondary" 
-                          style="margin-left: 10px;" />
-            </f:facet>
-        </p:card>
+                <f:facet name="footer">
+                    <p:commandButton value="Submit" 
+                                     action="#{addDataBean.save}" 
+                                     update="@form"
+                                     icon="pi pi-check"
+                                     styleClass="ui-button-primary" />
+                    
+                    <p:button value="Back" 
+                              outcome="index" 
+                              icon="pi pi-arrow-left"
+                              styleClass="ui-button-secondary" 
+                              style="margin-left: 10px;" />
+                </f:facet>
+            </p:card>
+        </p:outputPanel>
     </h:form>
 </h:body>
 </html>

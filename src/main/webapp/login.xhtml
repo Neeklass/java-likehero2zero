@@ -9,56 +9,56 @@
 </h:head>
 
 <h:body>
-    <h:form id="loginForm">
+    <h:form id="loginForm" styleClass="ui-fluid">
         <p:messages id="messages" showDetail="true" closable="true" />
         
-        <p:card style="width: 400px; margin: 50px auto;">
-            <f:facet name="title">
-                Login
-            </f:facet>
-            <f:facet name="subtitle">
-                Sign in to manage CO2 data
-            </f:facet>
-            
-            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+        <p:outputPanel style="max-width: 450px; margin: 50px auto; padding: 20px;">
+            <p:card>
+                <f:facet name="title">
+                    Login
+                </f:facet>
+                <f:facet name="subtitle">
+                    Sign in to manage CO2 data
+                </f:facet>
                 
-                <p:outputLabel for="username" value="Username:" />
-                <p:inputText id="username" 
-                             value="#{loginBean.username}" 
-                             required="true" 
-                             requiredMessage="Username is required"
-                             style="width: 100%;" />
+                <h:panelGrid columns="2" cellpadding="10" styleClass="ui-fluid" style="width: 100%;">
+                    
+                    <p:outputLabel for="username" value="Username:" />
+                    <p:inputText id="username" 
+                                 value="#{loginBean.username}" 
+                                 required="true" 
+                                 requiredMessage="Username is required" />
+                    
+                    <p:outputLabel for="password" value="Password:" />
+                    <p:password id="password" 
+                                value="#{loginBean.password}" 
+                                required="true" 
+                                requiredMessage="Password is required"
+                                feedback="false" />
+                    
+                </h:panelGrid>
                 
-                <p:outputLabel for="password" value="Password:" />
-                <p:password id="password" 
-                            value="#{loginBean.password}" 
-                            required="true" 
-                            requiredMessage="Password is required"
-                            feedback="false"
-                            style="width: 100%;" />
-                
-            </h:panelGrid>
-            
-            <f:facet name="footer">
-                <p:commandButton value="Sign In" 
-                                 action="#{loginBean.login}" 
-                                 update="@form"
-                                 icon="pi pi-sign-in"
-                                 styleClass="ui-button-success" />
-                
-                <p:button value="Register" 
-                          outcome="register" 
-                          icon="pi pi-user-plus"
-                          styleClass="ui-button-secondary" 
-                          style="margin-left: 10px;" />
-                          
-                <p:button value="Back" 
-                          outcome="index" 
-                          icon="pi pi-arrow-left"
-                          styleClass="ui-button-secondary" 
-                          style="margin-left: 10px;" />
-            </f:facet>
-        </p:card>
+                <f:facet name="footer">
+                    <p:commandButton value="Sign In" 
+                                     action="#{loginBean.login}" 
+                                     update="@form"
+                                     icon="pi pi-sign-in"
+                                     styleClass="ui-button-primary" />
+                    
+                    <p:button value="Register" 
+                              outcome="register" 
+                              icon="pi pi-user-plus"
+                              styleClass="ui-button-secondary" 
+                              style="margin-left: 10px;" />
+                              
+                    <p:button value="Back" 
+                              outcome="index" 
+                              icon="pi pi-arrow-left"
+                              styleClass="ui-button-secondary" 
+                              style="margin-left: 10px;" />
+                </f:facet>
+            </p:card>
+        </p:outputPanel>
     </h:form>
 </h:body>
 </html>

@@ -9,59 +9,62 @@
 </h:head>
 
 <h:body>
-    <h:form id="reviewForm">
+    <h:form id="reviewForm" styleClass="ui-fluid">
         <p:messages id="messages" showDetail="true" closable="true" />
         
-        <p:card style="width: 90%; margin: 50px auto;">
-            <f:facet name="title">
-                Data Approval
-            </f:facet>
-            <f:facet name="subtitle">
-                Review and approve submitted emission data
-            </f:facet>
-            
-            <p:dataTable id="pendingTable" 
-                         value="#{reviewBean.pendingData}" 
-                         var="data"
-                         emptyMessage="No pending datasets for approval."
-                         paginator="true" 
-                         rows="10"
-                         paginatorPosition="bottom">
+        <p:outputPanel style="max-width: 1200px; margin: 50px auto; padding: 20px;">
+            <p:card>
+                <f:facet name="title">
+                    Data Approval
+                </f:facet>
+                <f:facet name="subtitle">
+                    Review and approve submitted emission data
+                </f:facet>
                 
-                <p:column headerText="Year" sortBy="#{data.year}">
-                    <h:outputText value="#{data.year}" />
-                </p:column>
+                <p:dataTable id="pendingTable" 
+                             value="#{reviewBean.pendingData}" 
+                             var="data"
+                             emptyMessage="No pending datasets for approval."
+                             paginator="true" 
+                             rows="10"
+                             paginatorPosition="bottom"
+                             styleClass="ui-datatable-striped">
+                    
+                    <p:column headerText="Year" sortBy="#{data.year}">
+                        <h:outputText value="#{data.year}" />
+                    </p:column>
+                    
+                    <p:column headerText="Country">
+                        <h:outputText value="#{data.country.name}" />
+                    </p:column>
+                    
+                    <p:column headerText="CO2 Value (kt)">
+                        <h:outputText value="#{data.co2Value}">
+                            <f:convertNumber pattern="#,##0.000" />
+                        </h:outputText>
+                    </p:column>
+                    
+                    <p:column headerText="Submitted by">
+                        <h:outputText value="#{data.lastModifiedBy.username}" />
+                    </p:column>
+                    
+                    <p:column headerText="Action" style="width: 120px; text-align: center;">
+                        <p:commandButton value="Approve" 
+                                         action="#{reviewBean.approve(data.datasetId)}" 
+                                         update="@form"
+                                         icon="pi pi-check"
+                                         styleClass="ui-button-primary" />
+                    </p:column>
+                </p:dataTable>
                 
-                <p:column headerText="Country">
-                    <h:outputText value="#{data.country.name}" />
-                </p:column>
-                
-                <p:column headerText="CO2 Value (kt)">
-                    <h:outputText value="#{data.co2Value}">
-                        <f:convertNumber pattern="#,##0.000" />
-                    </h:outputText>
-                </p:column>
-                
-                <p:column headerText="Submitted by">
-                    <h:outputText value="#{data.lastModifiedBy.username}" />
-                </p:column>
-                
-                <p:column headerText="Action" style="width: 120px; text-align: center;">
-                    <p:commandButton value="Approve" 
-                                     action="#{reviewBean.approve(data.datasetId)}" 
-                                     update="@form"
-                                     icon="pi pi-check"
-                                     styleClass="ui-button-success" />
-                </p:column>
-            </p:dataTable>
-            
-            <f:facet name="footer">
-                <p:button value="Back to Home" 
-                          outcome="index" 
-                          icon="pi pi-arrow-left"
-                          styleClass="ui-button-secondary" />
-            </f:facet>
-        </p:card>
+                <f:facet name="footer">
+                    <p:button value="Back to Home" 
+                              outcome="index" 
+                              icon="pi pi-home"
+                              styleClass="ui-button-secondary" />
+                </f:facet>
+            </p:card>
+        </p:outputPanel>
     </h:form>
 </h:body>
 </html>
