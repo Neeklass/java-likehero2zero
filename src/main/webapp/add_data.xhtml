@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Neue Klimadaten erfassen - Hero To Zero</title>
+</h:head>
+
+<h:body>
+    <h:form id="addDataForm">
+        <p:messages id="messages" showDetail="true" closable="true" />
+        
+        <p:card style="width: 600px; margin: 50px auto;">
+            <f:facet name="title">
+                Neue Klimadaten erfassen
+            </f:facet>
+            <f:facet name="subtitle">
+                Tragen Sie neue CO2-Emissionsdaten ein
+            </f:facet>
+            
+            <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
+                
+                <p:outputLabel value="Land:" />
+                <h:outputText value="#{loginBean.currentUser.country.name}" 
+                              style="font-weight: bold;" />
+                
+                <p:outputLabel for="year" value="Jahr:" />
+                <p:inputNumber id="year" 
+                               value="#{addDataBean.newData.year}" 
+                               required="true"
+                               requiredMessage="Jahr ist erforderlich"
+                               decimalPlaces="0"
+                               minValue="1900"
+                               maxValue="2100"
+                               style="width: 100%;" />
+                
+                <p:outputLabel for="co2Value" value="CO2-Ausstoß (kt):" />
+                <p:inputNumber id="co2Value" 
+                               value="#{addDataBean.newData.co2Value}" 
+                               required="true"
+                               requiredMessage="CO2-Wert ist erforderlich"
+                               decimalPlaces="3"
+                               minValue="0"
+                               style="width: 100%;" />
+                
+            </h:panelGrid>
+            
+            <f:facet name="footer">
+                <p:commandButton value="Speichern" 
+                                 action="#{addDataBean.save}" 
+                                 update="@form"
+                                 icon="pi pi-save"
+                                 styleClass="ui-button-success" />
+                
+                <p:button value="Zurück" 
+                          outcome="index" 
+                          icon="pi pi-arrow-left"
+                          styleClass="ui-button-secondary" 
+                          style="margin-left: 10px;" />
+            </f:facet>
+        </p:card>
+    </h:form>
+</h:body>
+</html>

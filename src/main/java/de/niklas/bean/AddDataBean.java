@@ -33,6 +33,9 @@ public class AddDataBean {
                 return;
             }
             
+            // Land des angemeldeten Users setzen
+            newData.setCountry(loginBean.getCurrentUser().getCountry());
+            
             emissionService.saveNewData(newData, loginBean.getCurrentUser());
             
             FacesContext.getCurrentInstance().addMessage(null,
