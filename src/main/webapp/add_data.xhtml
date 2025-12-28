@@ -23,15 +23,16 @@
             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
                 
                 <p:outputLabel value="Land:" />
-                <h:outputText value="#{loginBean.currentUser.country.name}" 
+                <h:outputText value="#{loginSessionBean.user.country.name}" 
                               style="font-weight: bold;" />
                 
                 <p:outputLabel for="year" value="Jahr:" />
                 <p:inputNumber id="year" 
                                value="#{addDataBean.newData.year}" 
+                               decimalPlaces="0"
+                               thousandSeparator=""
                                required="true"
                                requiredMessage="Jahr ist erforderlich"
-                               decimalPlaces="0"
                                minValue="1900"
                                maxValue="2100"
                                style="width: 100%;" />

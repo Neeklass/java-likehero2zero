@@ -2,6 +2,7 @@ package de.niklas.bean;
 
 import de.niklas.model.EmissionData;
 import de.niklas.service.EmissionService;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -16,16 +17,27 @@ public class AddDataBean {
     private EmissionService emissionService;
     
     @Inject
-    private LoginBean loginBean;
+    private LoginSessionBean loginSessionBean;
     
     private EmissionData newData = new EmissionData();
+    
+    /**
+     * Initialisiert das EmissionData-Objekt mit dem Land des eingeloggten Users.
+     */
+    @PostConstruct
+    public void init() {
+        if (loginSessionBean.getUser() != null) {
+            newData.setCountry(loginSessionBean.getUser().getCountry());
+        }
+    }
     
     /**
      * Speichert neue Emissionsdaten über den EmissionService.
      */
     public void save() {
         try {
-            if (loginBean.getCurrentUser() == null) {
+            // Prüfe zuerst, ob ein User eingeloggt ist
+            if (loginSessionBean.getUser() == null) {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Fehler",
@@ -33,10 +45,8 @@ public class AddDataBean {
                 return;
             }
             
-            // Land des angemeldeten Users setzen
-            newData.setCountry(loginBean.getCurrentUser().getCountry());
-            
-            emissionService.saveNewData(newData, loginBean.getCurrentUser());
+            // Speichere Emissionsdaten mit dem eingeloggten User
+            emissionService.saveNewData(newData, loginSessionBean.getUser());
             
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,

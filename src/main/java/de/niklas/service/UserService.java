@@ -29,12 +29,13 @@ public class UserService {
 
     /**
      * Sucht einen User anhand des Usernamens.
+     * Lädt das Country-Objekt direkt mit (JOIN FETCH), um Lazy-Loading-Probleme zu vermeiden.
      * @param username Der Username
      * @return Der gefundene User oder null
      */
     public User findUserByUsername(String username) {
         List<User> results = em.createQuery(
-            "SELECT u FROM User u WHERE u.username = :username", User.class)
+            "SELECT u FROM User u LEFT JOIN FETCH u.country WHERE u.username = :username", User.class)
             .setParameter("username", username)
             .getResultList();
         

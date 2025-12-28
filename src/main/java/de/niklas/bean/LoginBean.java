@@ -15,6 +15,9 @@ public class LoginBean implements Serializable {
 
     @Inject
     private UserService userService;
+    
+    @Inject
+    private LoginSessionBean loginSessionBean;
 
     private String username;
     private String password;
@@ -30,6 +33,9 @@ public class LoginBean implements Serializable {
             // Login erfolgreich
             currentUser = user;
             
+            // WICHTIG: User auch in LoginSessionBean speichern
+            loginSessionBean.setUser(user);
+            
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Login erfolgreich",
@@ -44,9 +50,7 @@ public class LoginBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Login fehlgeschlagen",
-                    "Benutzername oder Passwort falsch."));
-            
-            password = null;
+                    "Benutzername oder Passwort ist falsch."));
             return null;
         }
     }
@@ -58,6 +62,9 @@ public class LoginBean implements Serializable {
         currentUser = null;
         username = null;
         password = null;
+        
+        // User auch aus LoginSessionBean entfernen
+        loginSessionBean.setUser(null);
         
         FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().invalidateSession();

@@ -11,6 +11,35 @@
 
 <h:body>
     <h:form id="mainForm">
+        <p:menubar>
+            <p:menuitem value="Startseite" icon="pi pi-home" outcome="index" />
+            
+            <!-- Wenn NICHT eingeloggt: Login & Registrieren -->
+            <p:menuitem value="Login" icon="pi pi-sign-in" outcome="login" 
+                        rendered="#{!loginSessionBean.isLoggedIn()}" />
+            <p:menuitem value="Registrieren" icon="pi pi-user-plus" outcome="register" 
+                        rendered="#{!loginSessionBean.isLoggedIn()}" />
+            
+            <!-- Wenn WISSENSCHAFTLER: Daten hinzufügen -->
+            <p:menuitem value="Daten hinzufügen" icon="pi pi-plus" outcome="add_data" 
+                        rendered="#{loginSessionBean.isScientist()}" />
+            
+            <!-- Wenn EDITOR: Freigabe -->
+            <p:menuitem value="Freigabe" icon="pi pi-check" outcome="review" 
+                        rendered="#{loginSessionBean.isEditor()}" />
+            
+            <!-- Wenn eingeloggt: Username und Logout -->
+            <f:facet name="options">
+                <h:panelGroup rendered="#{loginSessionBean.isLoggedIn()}">
+                    <h:outputText value="#{loginSessionBean.user.username}" 
+                                  style="margin-right: 10px; font-weight: bold;" />
+                    <p:commandButton value="Logout" icon="pi pi-sign-out" 
+                                     action="#{loginBean.logout}" 
+                                     styleClass="ui-button-secondary" />
+                </h:panelGroup>
+            </f:facet>
+        </p:menubar>
+        
         <h1>Like Hero To Zero</h1>
         
         <p>Test</p>

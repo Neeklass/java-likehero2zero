@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Datenfreigabe - Hero To Zero</title>
+</h:head>
+
+<h:body>
+    <h:form id="reviewForm">
+        <p:messages id="messages" showDetail="true" closable="true" />
+        
+        <p:card style="width: 90%; margin: 50px auto;">
+            <f:facet name="title">
+                Datenfreigabe
+            </f:facet>
+            <f:facet name="subtitle">
+                Überprüfen und genehmigen Sie eingereichte Emissionsdaten
+            </f:facet>
+            
+            <p:dataTable id="pendingTable" 
+                         value="#{reviewBean.pendingData}" 
+                         var="data"
+                         emptyMessage="Keine ausstehenden Datensätze zur Freigabe."
+                         paginator="true" 
+                         rows="10"
+                         paginatorPosition="bottom">
+                
+                <p:column headerText="Jahr" sortBy="#{data.year}">
+                    <h:outputText value="#{data.year}" />
+                </p:column>
+                
+                <p:column headerText="Land">
+                    <h:outputText value="#{data.country.name}" />
+                </p:column>
+                
+                <p:column headerText="CO2-Wert (kt)">
+                    <h:outputText value="#{data.co2Value}">
+                        <f:convertNumber pattern="#,##0.000" />
+                    </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Eingetragen von">
+                    <h:outputText value="#{data.lastModifiedBy.username}" />
+                </p:column>
+                
+                <p:column headerText="Aktion" style="width: 120px; text-align: center;">
+                    <p:commandButton value="Freigeben" 
+                                     action="#{reviewBean.approve(data.datasetId)}" 
+                                     update="@form"
+                                     icon="pi pi-check"
+                                     styleClass="ui-button-success" />
+                </p:column>
+            </p:dataTable>
+            
+            <f:facet name="footer">
+                <p:button value="Zurück zur Startseite" 
+                          outcome="index" 
+                          icon="pi pi-arrow-left"
+                          styleClass="ui-button-secondary" />
+            </f:facet>
+        </p:card>
+    </h:form>
+</h:body>
+</html>
