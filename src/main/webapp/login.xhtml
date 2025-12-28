@@ -17,42 +17,42 @@
                 Login
             </f:facet>
             <f:facet name="subtitle">
-                Melden Sie sich an, um CO2-Daten zu verwalten
+                Sign in to manage CO2 data
             </f:facet>
             
             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
                 
-                <p:outputLabel for="username" value="Benutzername:" />
+                <p:outputLabel for="username" value="Username:" />
                 <p:inputText id="username" 
                              value="#{loginBean.username}" 
                              required="true" 
-                             requiredMessage="Benutzername ist erforderlich"
+                             requiredMessage="Username is required"
                              style="width: 100%;" />
                 
-                <p:outputLabel for="password" value="Passwort:" />
+                <p:outputLabel for="password" value="Password:" />
                 <p:password id="password" 
                             value="#{loginBean.password}" 
                             required="true" 
-                            requiredMessage="Passwort ist erforderlich"
+                            requiredMessage="Password is required"
                             feedback="false"
                             style="width: 100%;" />
                 
             </h:panelGrid>
             
             <f:facet name="footer">
-                <p:commandButton value="Anmelden" 
+                <p:commandButton value="Sign In" 
                                  action="#{loginBean.login}" 
                                  update="@form"
                                  icon="pi pi-sign-in"
                                  styleClass="ui-button-success" />
                 
-                <p:button value="Registrieren" 
+                <p:button value="Register" 
                           outcome="register" 
                           icon="pi pi-user-plus"
                           styleClass="ui-button-secondary" 
                           style="margin-left: 10px;" />
                           
-                <p:button value="Zurück" 
+                <p:button value="Back" 
                           outcome="index" 
                           icon="pi pi-arrow-left"
                           styleClass="ui-button-secondary" 

@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Neue Klimadaten erfassen - Hero To Zero</title>
+    <title>Add Climate Data - Hero To Zero</title>
 </h:head>
 
 <h:body>
@@ -14,43 +14,43 @@
         
         <p:card style="width: 600px; margin: 50px auto;">
             <f:facet name="title">
-                Neue Klimadaten erfassen
+                Add Climate Data
             </f:facet>
             <f:facet name="subtitle">
-                Tragen Sie neue CO2-Emissionsdaten ein
+                Enter new CO2 emission data
             </f:facet>
             
             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
                 
-                <p:outputLabel for="country" value="Land:" />
+                <p:outputLabel for="country" value="Country:" />
                 <p:selectOneMenu id="country" 
                                  value="#{addDataBean.selectedCountryId}" 
                                  required="true"
-                                 requiredMessage="Bitte wählen Sie ein Land aus"
+                                 requiredMessage="Please select a country"
                                  style="width: 100%;">
-                    <f:selectItem itemLabel="Bitte wählen..." itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Please select..." itemValue="#{null}" noSelectionOption="true" />
                     <f:selectItems value="#{addDataBean.allCountries}" 
                                    var="c" 
                                    itemLabel="#{c.name}" 
                                    itemValue="#{c.countryId}" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="year" value="Jahr:" />
+                <p:outputLabel for="year" value="Year:" />
                 <p:inputNumber id="year" 
                                value="#{addDataBean.newData.year}" 
                                decimalPlaces="0"
                                thousandSeparator=""
                                required="true"
-                               requiredMessage="Jahr ist erforderlich"
+                               requiredMessage="Year is required"
                                minValue="1900"
                                maxValue="2100"
                                style="width: 100%;" />
                 
-                <p:outputLabel for="co2Value" value="CO2-Ausstoß (kt):" />
+                <p:outputLabel for="co2Value" value="CO2 Emissions (kt):" />
                 <p:inputNumber id="co2Value" 
                                value="#{addDataBean.newData.co2Value}" 
                                required="true"
-                               requiredMessage="CO2-Wert ist erforderlich"
+                               requiredMessage="CO2 value is required"
                                decimalPlaces="3"
                                minValue="0"
                                style="width: 100%;" />
@@ -58,13 +58,13 @@
             </h:panelGrid>
             
             <f:facet name="footer">
-                <p:commandButton value="Speichern" 
+                <p:commandButton value="Submit" 
                                  action="#{addDataBean.save}" 
                                  update="@form"
                                  icon="pi pi-save"
                                  styleClass="ui-button-success" />
                 
-                <p:button value="Zurück" 
+                <p:button value="Back" 
                           outcome="index" 
                           icon="pi pi-arrow-left"
                           styleClass="ui-button-secondary" 

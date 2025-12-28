@@ -12,20 +12,20 @@
 <h:body>
     <h:form id="mainForm">
         <p:menubar>
-            <p:menuitem value="Startseite" icon="pi pi-home" outcome="index" />
+            <p:menuitem value="Home" icon="pi pi-home" outcome="index" />
             
-            <!-- Wenn NICHT eingeloggt: Login & Registrieren -->
+            <!-- If NOT logged in: Login & Register -->
             <p:menuitem value="Login" icon="pi pi-sign-in" outcome="login" 
                         rendered="#{!loginSessionBean.isLoggedIn()}" />
-            <p:menuitem value="Registrieren" icon="pi pi-user-plus" outcome="register" 
+            <p:menuitem value="Register" icon="pi pi-user-plus" outcome="register" 
                         rendered="#{!loginSessionBean.isLoggedIn()}" />
             
-            <!-- Wenn WISSENSCHAFTLER: Daten hinzufügen -->
-            <p:menuitem value="Daten hinzufügen" icon="pi pi-plus" outcome="add_data" 
+            <!-- If SCIENTIST: Add Data -->
+            <p:menuitem value="Add Data" icon="pi pi-plus" outcome="add_data" 
                         rendered="#{loginSessionBean.isScientist()}" />
             
-            <!-- Wenn EDITOR: Freigabe -->
-            <p:menuitem value="Freigabe" icon="pi pi-check" outcome="review" 
+            <!-- If EDITOR: Approval -->
+            <p:menuitem value="Approval" icon="pi pi-check" outcome="review" 
                         rendered="#{loginSessionBean.isEditor()}" />
             
             <!-- Wenn eingeloggt: Username und Logout -->
@@ -42,11 +42,11 @@
         
         <h1>Like Hero To Zero</h1>
         
-        <p>Test</p>
+        <p>View the latest CO2 emission data by country</p>
 
-        <p:outputLabel for="countrySelect" value="Land auswählen: " />
+        <p:outputLabel for="countrySelect" value="Select country: " />
         <p:selectOneMenu id="countrySelect" value="#{publicDataBean.selectedCountryId}">
-            <f:selectItem itemLabel="Bitte wählen..." itemValue="" />
+            <f:selectItem itemLabel="Please select..." itemValue="" />
             <f:selectItems value="#{publicDataBean.allCountries}" var="c" 
                            itemLabel="#{c.name}" itemValue="#{c.countryId}" />
             <p:ajax listener="#{publicDataBean.updateSelectedData}" update="dataDisplay" />
@@ -56,16 +56,16 @@
 
         <h:panelGroup id="dataDisplay">
             <h:panelGrid columns="2" rendered="#{not empty publicDataBean.latestData}">
-                <h:outputText value="Jahr:" />
+                <h:outputText value="Year:" />
                 <h:outputText value="#{publicDataBean.latestData.year}" />
 
-                <h:outputText value="CO2 Ausstoß (kt):" />
+                <h:outputText value="CO2 Emissions (kt):" />
                 <h:outputText value="#{publicDataBean.latestData.co2Value}">
                     <f:convertNumber pattern="#,##0.000" />
                 </h:outputText>
             </h:panelGrid>
             
-            <h:outputText value="Keine freigegebenen Daten für dieses Land verfügbar." 
+            <h:outputText value="No approved data available for this country." 
                           rendered="#{empty publicDataBean.latestData and not empty publicDataBean.selectedCountryId}" />
         </h:panelGroup>
     </h:form>

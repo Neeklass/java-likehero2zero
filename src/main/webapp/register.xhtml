@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <h:head>
-    <title>Benutzerregistrierung - Hero To Zero</title>
+    <title>User Registration - Hero To Zero</title>
 </h:head>
 
 <h:body>
@@ -14,60 +14,60 @@
         
         <p:card style="width: 600px; margin: 50px auto;">
             <f:facet name="title">
-                Benutzerregistrierung
+                User Registration
             </f:facet>
             <f:facet name="subtitle">
-                Registrieren Sie sich als Wissenschaftler:in oder Editor:in
+                Register as an Environmental Scientist or Editor
             </f:facet>
             
             <h:panelGrid columns="2" cellpadding="10" style="width: 100%;">
                 
-                <p:outputLabel for="username" value="Benutzername:" />
+                <p:outputLabel for="username" value="Username:" />
                 <p:inputText id="username" 
                              value="#{registerBean.user.username}" 
                              required="true" 
-                             requiredMessage="Benutzername ist erforderlich"
+                             requiredMessage="Username is required"
                              style="width: 100%;" />
                 
-                <p:outputLabel for="password" value="Passwort:" />
+                <p:outputLabel for="password" value="Password:" />
                 <p:password id="password" 
                             value="#{registerBean.user.passwordHash}" 
                             required="true" 
-                            requiredMessage="Passwort ist erforderlich"
+                            requiredMessage="Password is required"
                             feedback="true"
-                            weakLabel="Schwach"
-                            goodLabel="Gut"
-                            strongLabel="Stark"
+                            weakLabel="Weak"
+                            goodLabel="Good"
+                            strongLabel="Strong"
                             style="width: 100%;" />
                 
-                <p:outputLabel for="firstname" value="Vorname:" />
+                <p:outputLabel for="firstname" value="First Name:" />
                 <p:inputText id="firstname" 
                              value="#{registerBean.user.firstname}" 
                              style="width: 100%;" />
                 
-                <p:outputLabel for="lastname" value="Nachname:" />
+                <p:outputLabel for="lastname" value="Last Name:" />
                 <p:inputText id="lastname" 
                              value="#{registerBean.user.lastname}" 
                              style="width: 100%;" />
                 
-                <p:outputLabel for="role" value="Rolle:" />
+                <p:outputLabel for="role" value="Role:" />
                 <p:selectOneMenu id="role" 
                                  value="#{registerBean.user.role}" 
                                  required="true"
-                                 requiredMessage="Bitte wählen Sie eine Rolle"
+                                 requiredMessage="Please select a role"
                                  style="width: 100%;">
-                    <f:selectItem itemLabel="-- Bitte wählen --" itemValue="#{null}" noSelectionOption="true" />
-                    <f:selectItem itemLabel="Wissenschaftler:in" itemValue="SCIENTIST" />
-                    <f:selectItem itemLabel="Editor:in" itemValue="EDITOR" />
+                    <f:selectItem itemLabel="-- Please select --" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Environmental Scientist" itemValue="SCIENTIST" />
+                    <f:selectItem itemLabel="Editor" itemValue="EDITOR" />
                 </p:selectOneMenu>
                 
-                <p:outputLabel for="country" value="Land:" />
+                <p:outputLabel for="country" value="Country:" />
                 <p:selectOneMenu id="country" 
                                  value="#{registerBean.selectedCountryId}" 
                                  required="true"
-                                 requiredMessage="Bitte wählen Sie ein Land aus"
+                                 requiredMessage="Please select a country"
                                  style="width: 100%;">
-                    <f:selectItem itemLabel="-- Bitte wählen --" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItem itemLabel="-- Please select --" itemValue="#{null}" noSelectionOption="true" />
                     <f:selectItems value="#{registerBean.allCountries}" 
                                    var="country" 
                                    itemLabel="#{country.name}" 
@@ -77,13 +77,13 @@
             </h:panelGrid>
             
             <f:facet name="footer">
-                <p:commandButton value="Registrieren" 
+                <p:commandButton value="Register" 
                                  action="#{registerBean.register}" 
                                  update="@form"
                                  icon="pi pi-user-plus"
                                  styleClass="ui-button-success" />
                 
-                <p:button value="Zurück" 
+                <p:button value="Back" 
                           outcome="index" 
                           icon="pi pi-arrow-left"
                           styleClass="ui-button-secondary" 
