@@ -28,9 +28,6 @@ public class AddDataBean {
     private EmissionData newData = new EmissionData();
     private Integer selectedCountryId;
     
-    /**
-     * Initialisiert das EmissionData-Objekt mit dem Land des eingeloggten Users.
-     */
     @PostConstruct
     public void init() {
         if (loginSessionBean.getUser() != null && loginSessionBean.getUser().getCountry() != null) {
@@ -38,12 +35,8 @@ public class AddDataBean {
         }
     }
     
-    /**
-     * Speichert neue Emissionsdaten über den EmissionService.
-     */
     public void save() {
         try {
-            // Prüfe zuerst, ob ein User eingeloggt ist
             if (loginSessionBean.getUser() == null) {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -52,7 +45,6 @@ public class AddDataBean {
                 return;
             }
             
-            // Setze das Land basierend auf der ausgewählten ID
             if (selectedCountryId == null) {
                 FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -76,7 +68,6 @@ public class AddDataBean {
             
             newData.setCountry(country);
             
-            // Speichere Emissionsdaten mit dem eingeloggten User
             emissionService.saveNewData(newData, loginSessionBean.getUser());
             
             FacesContext.getCurrentInstance().addMessage(null,
@@ -84,14 +75,13 @@ public class AddDataBean {
                     "Erfolg",
                     "Emissionsdaten wurden erfolgreich zur Prüfung eingereicht."));
             
-            // Neues Objekt für nächsten Eintrag mit Country vorbelegen
             newData = new EmissionData();
             if (loginSessionBean.getUser() != null && loginSessionBean.getUser().getCountry() != null) {
                 selectedCountryId = loginSessionBean.getUser().getCountry().getCountryId();
             }
             
         } catch (Exception e) {
-            e.printStackTrace(); // Gibt den vollen Stack Trace in die Konsole aus
+            e.printStackTrace();
             FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Fehler",
@@ -99,15 +89,10 @@ public class AddDataBean {
         }
     }
     
-    /**
-     * Lädt alle Länder für das Dropdown-Menü.
-     * @return Liste aller Länder
-     */
     public List<Country> getAllCountries() {
         return userService.getAllCountries();
     }
     
-    // Getter & Setter
     public EmissionData getNewData() {
         return newData;
     }

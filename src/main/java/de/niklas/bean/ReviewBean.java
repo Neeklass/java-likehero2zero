@@ -24,17 +24,10 @@ public class ReviewBean {
         loadPendingData();
     }
     
-    /**
-     * Lädt alle pending Emissionsdaten aus der Datenbank.
-     */
     public void loadPendingData() {
         pendingData = emissionService.getPendingData();
     }
     
-    /**
-     * Genehmigt einen Datensatz und lädt die Liste neu.
-     * @param id Die ID des zu genehmigenden Datensatzes
-     */
     public void approve(Integer id) {
         try {
             emissionService.approveData(id);
@@ -44,7 +37,6 @@ public class ReviewBean {
                     "Erfolg",
                     "Datensatz wurde erfolgreich freigegeben."));
             
-            // Liste neu laden
             loadPendingData();
             
         } catch (Exception e) {
@@ -55,7 +47,6 @@ public class ReviewBean {
         }
     }
     
-    // Getter & Setter
     public List<EmissionData> getPendingData() {
         return pendingData;
     }

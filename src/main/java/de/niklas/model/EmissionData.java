@@ -23,7 +23,7 @@ public class EmissionData {
     private BigDecimal co2Value;
 
     @Column(nullable = false)
-    private Integer status = 0; // 0 = pending, 1 = approved
+    private Integer status = 0;
 
     @ManyToOne
     @JoinColumn(name = "last_modified_by")
@@ -31,7 +31,6 @@ public class EmissionData {
 
     public EmissionData() {}
 
-    // Getter & Setter
     public Integer getDatasetId() { return datasetId; }
     public void setDatasetId(Integer datasetId) { this.datasetId = datasetId; }
     public Country getCountry() { return country; }

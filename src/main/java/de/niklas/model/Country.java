@@ -19,7 +19,6 @@ public class Country {
 
     public Country() {}
 
-    // Getter & Setter
     public Integer getCountryId() { return countryId; }
     public void setCountryId(Integer countryId) { this.countryId = countryId; }
     public String getName() { return name; }

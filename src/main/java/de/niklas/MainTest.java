@@ -22,7 +22,7 @@ public class MainTest {
 
             User niklas = new User();
             niklas.setUsername("niklas_dev");
-            niklas.setPasswordHash("geheim123"); 
+            niklas.setPasswordHash("geheim123");
             niklas.setFirstname("Niklas");
             niklas.setRole("EDITOR"); 
             niklas.setCountry(germany); 

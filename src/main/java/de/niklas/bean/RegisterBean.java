@@ -20,12 +20,8 @@ public class RegisterBean {
     private User user = new User();
     private Integer selectedCountryId;
 
-    /**
-     * Registriert einen neuen User und zeigt eine Erfolgsmeldung an.
-     */
     public void register() {
         try {
-            // Setze das Land basierend auf der ausgewählten ID
             if (selectedCountryId != null) {
                 Country country = userService.getAllCountries().stream()
                     .filter(c -> c.getCountryId().equals(selectedCountryId))
@@ -42,7 +38,6 @@ public class RegisterBean {
                     "Erfolg", 
                     "Benutzer '" + user.getUsername() + "' wurde erfolgreich registriert!"));
             
-            // Neues User-Objekt für nächste Registrierung
             user = new User();
             
         } catch (Exception e) {
@@ -54,16 +49,10 @@ public class RegisterBean {
         }
     }
 
-    /**
-     * Lädt alle Länder aus der Datenbank für das Dropdown-Menü.
-     * @return Liste aller Länder
-     */
     public List<Country> getAllCountries() {
-        // Wir nutzen den Service, der bereits eine funktionierende Datenbankverbindung hat
         return userService.getAllCountries();
     }
 
-    // Getter & Setter
     public User getUser() {
         return user;
     }

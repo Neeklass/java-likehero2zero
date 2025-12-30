@@ -25,7 +25,7 @@ public class User {
     private String lastname;
     
     @Column(nullable = false)
-    private String role; // "SCIENTIST" oder "EDITOR"
+    private String role;
 
     private String street;
     @Column(name = "street_suffix")
@@ -34,10 +34,8 @@ public class User {
     @Column(name = "zip_code")
     private String zipCode;
 
-    // Standard-Konstruktor für JPA
     public User() {}
 
-    // Getter und Setter
     public Integer getUserId() { return userId; }
     public void setUserId(Integer userId) { this.userId = userId; }
 
