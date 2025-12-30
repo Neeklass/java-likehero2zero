@@ -14,8 +14,11 @@ A Java web application for visualizing and managing global CO2 emissions data. T
 - **Review Workflow**: Submit data changes for review before publication (optional feature)
 
 ## Architecture
+### UML
 
 ![UML](docs/UML.svg)
+
+### ERM
 
 ![ERM](docs/ERM.svg)
 
@@ -68,5 +71,6 @@ The application uses the [Our World in Data CO2 Dataset](data/owid-co2-data.csv)
 - `src/main/resources/META-INF/` - Configuration files
 - `data/` - CO2 emissions dataset
 - `docs/` - Documentation and diagrams
+
 
 
