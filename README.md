@@ -15,7 +15,9 @@ A Java web application for visualizing and managing global CO2 emissions data. T
 
 ## Architecture
 
-![UML Diagram](docs/UML.svg)
+![UML](docs/UML.svg)
+
+![ERM](docs/ERM.svg)
 
 ## Technology Stack
 
